@@ -1,5 +1,24 @@
-let userName = "qamar Sharef";
-let Password = "qamar12345";
+document.addEventListener("DOMContentLoaded", function () {
+
+const loginButton = document.getElementById("login");
+
+
+let users = {
+ username : "qamar_sharef",
+ password : "qamar12345"
+};
+
+
+loginButton.addEventListener("click", (event) => {
+
+event.preventDefault();
+
+const userNameInput = document.getElementById("username");
+const PasswordInput = document.getElementById("password");
+const container = document.querySelector(".container");
+
+const userName = userNameInput.value.trim();
+const Password = PasswordInput.value.trim();
 
 function authenticateUser(username, password){
 
@@ -7,44 +26,39 @@ function authenticateUser(username, password){
 
         setTimeout(() => {
 
-        if (username === userName && password === Password){
+        if (username === users.username &&  password === users.password){
 
-        resolve("Authentication successful");
+        resolve("Authentication successful, Welcome " + userName);
 
         }
         else {
 
-        reject("Authentication failed");
+        reject("Authentication failed, Incorrect userName or Password");
 
         }
         
-    })
+    }, 1000);
 
-    
- } , 1000);
+});
 
  return authenticatePromise;
 
 }
 
-authenticateUser("qamar Sharef", "qamar12345").then((AuthenticationSuccess) => {
+authenticateUser(userName, Password).then((AuthenticationSuccess) => {
 
- console.log(AuthenticationSuccess + " " + "welcome: " + "qamar");
+    const newWindow = window.open(); 
+    newWindow.document.write(AuthenticationSuccess);          
 
-})
-.catch((AuthenticationFailed) => {
+}).catch((AuthenticationFailed) => {
 
- console.log(AuthenticationFailed + " with " + "qamar" + " inCorrect userName or password");
+    const containerItem = document.createElement("label");
+    containerItem.textContent = AuthenticationFailed;
+
+    container.appendChild(containerItem);
 
 });
 
-authenticateUser("raghad safi", "raghad12345").then((AuthenticationSuccess1) => {
 
- console.log(AuthenticationSuccess1 + " " + "welcome: " + "raghad");
-
-})
-.catch((AuthenticationFailed1) => {
-
- console.log(AuthenticationFailed1 + " with " + "raghad" + " inCorrect userName or password");
-
+});
 });
