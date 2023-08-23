@@ -20,7 +20,7 @@ const container = document.querySelector(".container");
 const userName = userNameInput.value.trim();
 const Password = PasswordInput.value.trim();
 
-function authenticateUser(username, password){
+function (username, password){
 
     let authenticatePromise = new Promise((resolve, reject) => {
 
